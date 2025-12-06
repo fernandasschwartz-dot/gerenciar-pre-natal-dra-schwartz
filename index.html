@@ -1295,35 +1295,25 @@
     });
   }
 
-  // === AQUI EXIGIMOS LOGIN DO NETLIFY IDENTITY ===
+   // === INICIALIZAÇÃO DA PÁGINA ===
+  // Sempre renderiza a tabela; o Netlify Identity só cuida de login/logout,
+  // mas não trava o funcionamento do gerenciador.
   document.addEventListener("DOMContentLoaded", () => {
-    if (window.netlifyIdentity) {
-      netlifyIdentity.on("init", (user) => {
-        if (user) {
-          // Já logado → mostra a tabela
-          renderizarTabela();
-        } else {
-          // Não logado → abre modal de login
-          netlifyIdentity.open();
-        }
-      });
+    // Carrega e mostra os dados salvos no navegador
+    renderizarTabela();
 
+    // Se o Identity estiver ativo no Netlify, conecta eventos de login/logout
+    if (window.netlifyIdentity) {
       netlifyIdentity.on("login", () => {
+        // Se abrir modal em algum momento, só fecha depois do login
         netlifyIdentity.close();
-        renderizarTabela();
       });
 
       netlifyIdentity.on("logout", () => {
+        // Ao sair, recarrega a página
         window.location.reload();
       });
 
       netlifyIdentity.init();
-    } else {
-      // Se Identity não carregar, não trava (fallback)
-      renderizarTabela();
     }
   });
-</script>
-
-</body>
-</html>
