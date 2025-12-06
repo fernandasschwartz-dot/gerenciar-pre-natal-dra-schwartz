@@ -1,2191 +1,1332 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
-
   <title>PRÉ-NATAL DRA SCHWARTZ</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+  <!-- Netlify Identity: exige login para usar o gerenciador -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
-
     :root {
-
       --rosa1: #ec407a;
-
       --rosa2: #d81b60;
-
       --rosa3: #f48fb1;
-
       --rosa-claro: #ffe4ef;
-
       --bg: #fff7fb;
-
       --texto: #333;
 
-
-
       --risk-baixo: #e8f5e9;
-
       --risk-inter: #fff8e1;
-
       --risk-alto: #ffebee;
-
     }
-
-
 
     * { box-sizing: border-box; }
 
-
-
     body {
-
       margin: 0;
-
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-
       background: var(--bg);
-
       color: var(--texto);
-
     }
-
-
 
     header {
-
       background: linear-gradient(135deg, var(--rosa1), var(--rosa2));
-
       color: white;
-
       text-align: center;
-
       padding: 22px 12px 18px;
-
       border-bottom-left-radius: 22px;
-
       border-bottom-right-radius: 22px;
-
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-
     }
-
-
 
     header h1 {
-
       margin: 0;
-
       font-size: 24px;
-
       font-weight: 800;
-
       display: flex;
-
       justify-content: center;
-
       align-items: center;
-
       gap: 10px;
-
     }
-
-
 
     .gestante-icon { font-size: 30px; }
 
-
-
     .subtitle {
-
       font-size: 14px;
-
       margin-top: 6px;
-
       opacity: 0.95;
-
     }
-
-
 
     .chips { margin-top: 8px; }
 
-
-
     .chip {
-
       display: inline-flex;
-
       align-items: center;
-
       gap: 5px;
-
       background: rgba(255,255,255,0.22);
-
       padding: 4px 10px;
-
       border-radius: 999px;
-
       font-size: 12px;
-
       margin: 2px;
-
     }
-
-
 
     .container {
-
       max-width: 1200px;
-
       margin: 0 auto 40px;
-
       padding: 16px;
-
     }
-
-
 
     .card {
-
       background: #fff;
-
       border-radius: 14px;
-
       padding: 16px;
-
       margin-bottom: 18px;
-
       border: 1px solid var(--rosa3);
-
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-
     }
-
-
 
     .card h2 {
-
       margin: 0 0 10px;
-
       font-size: 18px;
-
       color: #880e4f;
-
       display: flex;
-
       align-items: center;
-
       gap: 6px;
-
     }
-
-
 
     label {
-
       font-weight: 600;
-
       font-size: 13px;
-
     }
-
-
 
     input, select, textarea {
-
       width: 100%;
-
       padding: 7px 9px;
-
       border-radius: 8px;
-
       border: 1px solid #ddd;
-
       margin-top: 3px;
-
       font-size: 13px;
-
       font-family: inherit;
-
       background: #fff;
-
     }
-
-
 
     textarea {
-
       resize: vertical;
-
       min-height: 60px;
-
     }
-
-
 
     .row {
-
       display: flex;
-
       flex-wrap: wrap;
-
       gap: 10px;
-
       margin-top: 6px;
-
     }
-
-
 
     .col-2 { flex: 0 0 calc(16.66% - 8px); }
-
     .col-3 { flex: 0 0 calc(25% - 8px); }
-
     .col-4 { flex: 0 0 calc(33.33% - 8px); }
-
     .col-6 { flex: 0 0 calc(50% - 8px); }
-
     .col-12 { flex: 0 0 100%; }
 
-
-
     @media (max-width: 900px) {
-
       .col-2, .col-3, .col-4, .col-6 { flex: 0 0 100%; }
-
     }
-
-
 
     button {
-
       border: none;
-
       border-radius: 8px;
-
       padding: 9px 12px;
-
       font-size: 14px;
-
       font-weight: 600;
-
       font-family: inherit;
-
       cursor: pointer;
-
       transition: 0.2s;
-
     }
-
-
 
     .btn-primary {
-
       background: var(--rosa1);
-
       color: white;
-
       width: 100%;
-
     }
-
     .btn-primary:hover { background: var(--rosa2); }
 
-
-
     .btn-outline {
-
       background: white;
-
       color: var(--rosa2);
-
       border: 1px solid var(--rosa2);
-
     }
-
     .btn-outline:hover { background: var(--rosa-claro); }
 
-
-
     .btn-small {
-
       font-size: 11px;
-
       padding: 4px 8px;
-
       margin: 1px;
-
     }
-
-
 
     .small {
-
       font-size: 11px;
-
       color: #616161;
-
     }
-
-
 
     .table-wrapper {
-
       border-radius: 10px;
-
       border: 1px solid #f3c5dd;
-
       max-height: 430px;
-
       overflow: auto;
-
     }
-
-
 
     table {
-
       width: 100%;
-
       border-collapse: collapse;
-
       font-size: 12px;
-
     }
-
-
 
     th, td {
-
       padding: 6px 6px;
-
       border-bottom: 1px solid #eee;
-
       text-align: left;
-
       vertical-align: top;
-
     }
-
-
 
     th {
-
       position: sticky;
-
       top: 0;
-
       background: var(--rosa-claro);
-
       z-index: 1;
-
       font-size: 12px;
-
     }
-
-
 
     .row-baixo { background: var(--risk-baixo); border-left: 4px solid #2e7d32; }
-
     .row-intermediario { background: var(--risk-inter); border-left: 4px solid #ffa000; }
-
     .row-alto { background: var(--risk-alto); border-left: 4px solid #c62828; }
 
-
-
     .badge {
-
       display: inline-block;
-
       border-radius: 999px;
-
       padding: 2px 7px;
-
       font-size: 11px;
-
       margin: 1px 0;
-
     }
-
-
 
     .badge-ok { background: #e8f5e9; color: #2e7d32; }
-
     .badge-warn { background: #fff8e1; color: #f57f17; }
-
     .badge-neutral { background: #eceff1; color: #455a64; }
 
-
-
     .pill-risk {
-
       display: inline-flex;
-
       align-items: center;
-
       gap: 4px;
-
       border-radius: 999px;
-
       padding: 2px 8px;
-
       font-size: 11px;
-
       background: rgba(255,255,255,0.9);
-
     }
-
-
 
     .pill-risk.baixo { border: 1px solid #2e7d32; color: #2e7d32; }
-
     .pill-risk.intermediario { border: 1px solid #ffa000; color: #e65100; }
-
     .pill-risk.alto { border: 1px solid #c62828; color: #b71c1c; }
 
-
-
     #qrcode {
-
       margin-top: 10px;
-
       display: flex;
-
       justify-content: center;
-
     }
-
-
 
     .filter-buttons {
-
       display: flex;
-
       gap: 6px;
-
       flex-wrap: wrap;
-
       justify-content: flex-end;
-
     }
-
-
 
     .btn-filter-active {
-
       background: var(--rosa2);
-
       color: #fff;
-
     }
-
   </style>
-
 </head>
-
 <body>
 
-
-
 <header>
-
   <h1>
-
     <span class="gestante-icon">🤰</span>
-
     PRÉ-NATAL DRA SCHWARTZ
-
   </h1>
-
   <div class="subtitle">
-
     Painel de gestantes com risco, exames e consultas conforme protocolo.
-
   </div>
-
   <div class="chips">
-
     <span class="chip">🟢 Habitual</span>
-
     <span class="chip">🟡 Interm.</span>
-
     <span class="chip">🔴 Alto risco</span>
-
     <span class="chip">📅 IG pela US / DUM</span>
-
   </div>
-
 </header>
-
-
 
 <div class="container">
 
-
+  <!-- Botão de logout (só funciona se Identity estiver ativo no Netlify) -->
+  <div style="text-align:right; margin-bottom:8px;">
+    <button type="button" class="btn-outline btn-small"
+            onclick="if (window.netlifyIdentity) { netlifyIdentity.logout(); }">
+      Sair
+    </button>
+  </div>
 
   <!-- FORMULÁRIO -->
-
   <div class="card">
-
     <h2>🤰 Cadastrar / Editar Gestante</h2>
-
     <form id="form-gestante">
-
       <input type="hidden" id="id">
 
-
-
       <div class="row">
-
         <div class="col-6">
-
           <label>Nome completo</label>
-
           <input id="nome" required>
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Data de nascimento</label>
-
           <input id="dataNasc" type="date">
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Idade</label>
-
           <input id="idade" type="number" min="10" max="60">
-
         </div>
 
-
-
         <div class="col-4">
-
           <label>UBS</label>
-
           <input id="ubs" placeholder="Ex.: UBS Santuário">
-
         </div>
 
-
-
         <div class="col-4">
-
           <label>Microárea</label>
-
           <input id="microarea">
-
         </div>
-
-
 
         <div class="col-4">
-
           <label>ACS</label>
-
           <input id="acs">
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Classificação de risco</label>
-
           <select id="risco">
-
             <option value="">Selecione</option>
-
             <option value="baixo">Risco habitual</option>
-
             <option value="intermediario">Risco intermediário</option>
-
             <option value="alto">Alto risco</option>
-
           </select>
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>DUM</label>
-
           <input id="dum" type="date">
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Data da 1ª US</label>
-
           <input id="usData" type="date">
-
         </div>
 
-
-
         <div class="col-2">
-
           <label>IG na US (sem)</label>
-
           <input id="usSemanas" type="number" min="0" max="42">
-
         </div>
-
-
 
         <div class="col-2">
-
           <label>IG na US (dias)</label>
-
           <input id="usDias" type="number" min="0" max="6">
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Última consulta</label>
-
           <input id="consultaUltima" type="date">
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Próxima consulta (pode ajustar)</label>
-
           <input id="consultaProxima" type="date">
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>DPP (calculada)</label>
-
           <input id="dpp" type="date" readonly>
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Swab vaginal / retal</label>
-
           <select id="swab">
-
             <option value="">Não solicitado</option>
-
             <option value="solicitado">Solicitado</option>
-
             <option value="realizado">Realizado</option>
-
           </select>
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Exames 1º tri</label>
-
           <select id="ex1">
-
             <option value="">Não solicitado</option>
-
             <option value="solicitado">Solicitado</option>
-
             <option value="realizado">Realizado</option>
-
           </select>
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Exames 2º tri / TTOG</label>
-
           <select id="ex2">
-
             <option value="">Não solicitado</option>
-
             <option value="solicitado">Solicitado</option>
-
             <option value="realizado">Realizado</option>
-
           </select>
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Exames 3º tri</label>
-
           <select id="ex3">
-
             <option value="">Não solicitado</option>
-
             <option value="solicitado">Solicitado</option>
-
             <option value="realizado">Realizado</option>
-
           </select>
-
         </div>
 
-
-
         <div class="col-3">
-
           <label>Vacinas</label>
-
           <select id="vacinas">
-
             <option value="">Não informado</option>
-
             <option value="ok">OK / em dia</option>
-
             <option value="pendente">Pendente</option>
-
           </select>
-
         </div>
-
-
 
         <div class="col-3">
-
           <label>Odonto</label>
-
           <select id="odonto">
-
             <option value="">Não informado</option>
-
             <option value="ok">Avaliada / tratada</option>
-
             <option value="pendente">Pendente</option>
-
           </select>
-
         </div>
 
-
-
         <div class="col-6">
-
           <label>Condições de saúde / comorbidades</label>
-
           <textarea id="condicoes" placeholder="Ex.: HAS, DM2, cardiopatia, uso de medicação contínua..."></textarea>
-
         </div>
-
-
 
         <div class="col-6">
-
           <label>Alergias</label>
-
           <textarea id="alergias" placeholder="Ex.: alergia a penicilina, dipirona, alimentos..."></textarea>
-
         </div>
-
-
 
         <div class="col-12">
-
           <label>Justificativa da estratificação de risco</label>
-
           <textarea id="justificativa" placeholder="Ex.: HAS crônica, DMG prévia, idade ≥ 35 anos, cesáreas prévias, etc."></textarea>
-
         </div>
-
       </div>
-
-
 
       <div class="row" style="margin-top:10px;">
-
         <div class="col-6">
-
           <button type="submit" class="btn-primary">💾 Salvar gestante</button>
-
         </div>
-
         <div class="col-6">
-
           <button type="button" class="btn-outline" onclick="limparFormulario()">🧹 Limpar formulário</button>
-
         </div>
-
       </div>
-
-
 
       <div class="small" style="margin-top:6px;">
-
         IG é calculada priorizando a 1ª US (semanas + dias na data do exame).  
-
         Na ausência de US informada, utiliza a DUM para estimativa.
-
       </div>
-
     </form>
-
   </div>
-
-
 
   <!-- LISTA / PAINEL -->
-
   <div class="card">
-
     <div class="row" style="align-items:center; margin-bottom:8px;">
-
       <div class="col-6">
-
         <h2>📋 Gestantes cadastradas</h2>
-
       </div>
-
       <div class="col-6" style="text-align:right;">
-
         <div class="filter-buttons">
-
           <button type="button" class="btn-outline btn-small" id="f-todas" onclick="setFiltro('todas')">👀 Todas</button>
-
           <button type="button" class="btn-outline btn-small" id="f-atraso" onclick="setFiltro('atraso')">⏰ Em atraso</button>
-
           <button type="button" class="btn-outline btn-small" id="f-risco" onclick="setFiltro('risco')">⚠️ Interm./Alto risco</button>
-
           <button class="btn-outline btn-small" onclick="exportarCSV()">📤 CSV</button>
-
+          <button class="btn-outline btn-small" onclick="exportarPDFGeral()">📄 PDF geral</button>
         </div>
-
       </div>
-
     </div>
-
-
 
     <div class="table-wrapper">
-
       <table>
-
         <thead>
-
           <tr>
-
             <th>Gestante / UBS</th>
-
             <th>IG hoje / DPP</th>
-
             <th>Risco</th>
-
             <th>Exames / Swab / Vacinas / Odonto</th>
-
             <th>Consultas</th>
-
             <th>Alertas (exames + janelas)</th>
-
             <th>Condições / Alergias / Justificativa</th>
-
             <th>Ações</th>
-
           </tr>
-
         </thead>
-
         <tbody id="tabela-gestantes"></tbody>
-
       </table>
-
     </div>
-
-
 
     <div class="small" style="margin-top:6px;">
-
       Lista ordenada por: consulta atrasada ⟶ maior risco ⟶ maior IG.  
-
       Alertas por janelas: 1º tri, US morfológica 20–26s, TTOG/2º tri 24–28s, exames 3º tri 32–36s, US 34–37s, swab 35–37s.
-
     </div>
-
   </div>
 
-
-
   <!-- BACKUP / QR CODE -->
-
   <div class="card">
-
     <h2>📦 Backup e compartilhamento</h2>
 
     <div class="small">
-
       Para usar em outro aparelho, exporte o backup em JSON neste dispositivo
-
       e depois importe no outro aparelho usando o mesmo app.
-
     </div>
 
     <div class="row" style="margin-top:8px;">
-
       <div class="col-6">
-
         <button class="btn-outline" type="button" onclick="exportarBackupJSON()">📤 Exportar backup (.json)</button>
-
       </div>
-
       <div class="col-6">
-
         <input type="file" id="inputBackup" accept=".json" style="display:none" onchange="importarBackupJSON(event)">
-
         <button class="btn-outline" type="button" onclick="document.getElementById('inputBackup').click()">📥 Importar backup (.json)</button>
-
       </div>
-
     </div>
-
-
 
     <hr style="margin:14px 0; border:none; border-top:1px dashed #f0b4d4;">
 
-
-
     <h2>🔗 Compartilhar com a equipe</h2>
-
     <div class="small">
-
       Use este QR Code para abrir o app em outros dispositivos da equipe.
-
     </div>
-
     <div style="margin-top:8px;">
-
       <button class="btn-outline" type="button" onclick="gerarQRCode()">📱 Gerar / atualizar QR Code</button>
-
     </div>
-
     <div id="qrcode"></div>
-
   </div>
-
-
 
 </div>
 
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-
-
 <script>
-
   const STORAGE_KEY = "prenatal_dra_schwartz_v6";
-
   let filtroAtual = "todas";
 
-
-
   function carregarGestantes() {
-
     const raw = localStorage.getItem(STORAGE_KEY);
-
     if (!raw) return [];
-
     try { return JSON.parse(raw); } catch(e) { console.error(e); return []; }
-
   }
-
-
 
   function salvarGestantes(lista) {
-
     localStorage.setItem(STORAGE_KEY, JSON.stringify(lista));
-
   }
-
-
 
   function calcularIdade(dataNascStr) {
-
     if (!dataNascStr) return "";
-
     const d = new Date(dataNascStr);
-
     if (isNaN(d)) return "";
-
     const hoje = new Date();
-
     let idade = hoje.getFullYear() - d.getFullYear();
-
     const m = hoje.getMonth() - d.getMonth();
-
     if (m < 0 || (m === 0 && hoje.getDate() < d.getDate())) idade--;
-
     return idade;
-
   }
-
-
 
   // === IG CORRIGIDA (US / DUM) ===
-
   function calcularIG(dum, usData, usSemanas, usDias) {
-
     const hoje = new Date();
-
     hoje.setHours(0,0,0,0);
-
-
 
     // Prioriza 1ª US
-
     if (usData && usSemanas !== "" && usSemanas != null) {
-
       const ref = new Date(usData + "T00:00:00");
-
       if (isNaN(ref)) return null;
-
       const w = parseInt(usSemanas || "0", 10);
-
       const d = parseInt(usDias || "0", 10);
-
       if (isNaN(w) || isNaN(d)) return null;
 
-
-
       const diffDias = Math.round((hoje - ref) / 86400000); // corrige fuso/horário
-
       const total = w * 7 + d + diffDias;
-
       if (total < 0) return null;
 
-
-
       return { semanas: Math.floor(total / 7), dias: total % 7, total, metodo: "US" };
-
     }
-
-
 
     // Sem US → usa DUM
-
     if (dum) {
-
       const ref = new Date(dum + "T00:00:00");
-
       if (isNaN(ref)) return null;
-
       const diffDias = Math.round((hoje - ref) / 86400000);
-
       if (diffDias < 0) return null;
 
-
-
       return { semanas: Math.floor(diffDias / 7), dias: diffDias % 7, total: diffDias, metodo: "DUM" };
-
     }
-
     return null;
-
   }
-
-
 
   // === DPP corrigida, alinhada com a IG ===
-
   function estimarDPP(dum, usData, usSemanas, usDias) {
-
     let base = null;
 
-
-
     if (dum) {
-
       base = new Date(dum + "T00:00:00");
-
     } else if (usData && usSemanas !== "" && usSemanas != null) {
-
       const ref = new Date(usData + "T00:00:00");
-
       const w = parseInt(usSemanas || "0", 10);
-
       const d = parseInt(usDias || "0", 10);
-
       if (!isNaN(ref) && !isNaN(w) && !isNaN(d)) {
-
         const diasIG = w * 7 + d;
-
         base = new Date(ref.getTime() - diasIG * 86400000);
-
       }
-
     }
-
-
 
     if (!base || isNaN(base)) return "";
-
     const dpp = new Date(base.getTime() + 280 * 86400000);
-
     return dpp.toISOString().slice(0,10);
-
   }
-
-
 
   function sugerirProximaConsulta(ig, risco, consultaUltimaStr) {
-
     if (!ig) return "";
-
     let diasIntervalo;
-
     if (risco === "alto") {
-
       if (ig.semanas < 28) diasIntervalo = 21;
-
       else if (ig.semanas < 36) diasIntervalo = 10;
-
       else diasIntervalo = 7;
-
     } else if (risco === "intermediario") {
-
       if (ig.semanas < 28) diasIntervalo = 30;
-
       else if (ig.semanas < 36) diasIntervalo = 14;
-
       else diasIntervalo = 7;
-
     } else {
-
       if (ig.semanas < 28) diasIntervalo = 30;
-
       else if (ig.semanas < 36) diasIntervalo = 21;
-
       else diasIntervalo = 7;
-
     }
-
-
 
     let base = new Date();
-
     if (consultaUltimaStr) {
-
       const c = new Date(consultaUltimaStr);
-
       if (!isNaN(c)) base = c;
-
     }
-
     const prox = new Date(base.getTime() + diasIntervalo * 86400000);
-
     return prox.toISOString().slice(0,10);
-
   }
-
-
 
   function badgeExame(status, label) {
-
     if (!status) return `<span class="badge badge-neutral">${label}: não solicitado</span>`;
-
     if (status === "realizado") return `<span class="badge badge-ok">${label}: realizado</span>`;
-
     if (status === "solicitado") return `<span class="badge badge-warn">${label}: solicitado</span>`;
-
     return `<span class="badge badge-neutral">${label}: não informado</span>`;
-
   }
-
-
 
   function badgeOkPend(status, okText, pendText) {
-
     if (!status) return `<span class="badge badge-neutral">${pendText}</span>`;
-
     if (status === "ok") return `<span class="badge badge-ok">${okText}</span>`;
-
     if (status === "pendente") return `<span class="badge badge-warn">${pendText}</span>`;
-
     return `<span class="badge badge-neutral">${pendText}</span>`;
-
   }
-
-
 
   function gerarAlertasExames(ig, ex1, ex2, ex3, swab) {
-
     if (!ig) return "";
-
     const w = ig.semanas;
-
     const msgs = [];
 
-
-
     if (w <= 13 && ex1 !== "realizado") {
-
       msgs.push("Garantir exames de 1º tri (sorologias, uro, hemograma, etc.).");
-
     }
-
     if (w >= 20 && w <= 26) {
-
       msgs.push("Verificar/solicitar US morfológica 20–26s.");
-
     }
-
     if (w >= 24 && w <= 28 && ex2 !== "realizado") {
-
       msgs.push("Solicitar TTOG 75 g + exames de 2º tri (24–28s).");
-
     }
-
     if (w >= 32 && w <= 36 && ex3 !== "realizado") {
-
       msgs.push("Solicitar exames de 3º tri (hemograma, urina, sorologias).");
-
     }
-
     if (w >= 34 && w <= 37) {
-
       msgs.push("Programar/confirmar US 34–37s.");
-
     }
-
     if (w >= 35 && w <= 37 && swab !== "realizado") {
-
       msgs.push("Lembrar swab vaginal/retal (35–37s), conforme protocolo.");
-
     }
-
-
 
     if (!msgs.length) return '<span class="small">Sem alerta específico nesta IG.</span>';
-
     return "• " + msgs.join("<br>• ");
-
   }
-
-
 
   function limparFormulario() {
-
     document.getElementById("form-gestante").reset();
-
     document.getElementById("id").value = "";
-
     document.getElementById("dpp").value = "";
-
   }
-
-
 
   function preencherFormulario(g) {
-
     document.getElementById("id").value = g.id;
-
     document.getElementById("nome").value = g.nome || "";
-
     document.getElementById("dataNasc").value = g.dataNasc || "";
-
     document.getElementById("idade").value = g.idade || "";
-
     document.getElementById("ubs").value = g.ubs || "";
-
     document.getElementById("microarea").value = g.microarea || "";
-
     document.getElementById("acs").value = g.acs || "";
-
     document.getElementById("risco").value = g.risco || "";
-
     document.getElementById("dum").value = g.dum || "";
-
     document.getElementById("usData").value = g.usData || "";
-
     document.getElementById("usSemanas").value = g.usSemanas ?? "";
-
     document.getElementById("usDias").value = g.usDias ?? "";
-
     document.getElementById("consultaUltima").value = g.consultaUltima || "";
-
     document.getElementById("consultaProxima").value = g.consultaProxima || "";
-
     document.getElementById("dpp").value = g.dpp || "";
-
     document.getElementById("swab").value = g.swab || "";
-
     document.getElementById("ex1").value = g.ex1 || "";
-
     document.getElementById("ex2").value = g.ex2 || "";
-
     document.getElementById("ex3").value = g.ex3 || "";
-
     document.getElementById("vacinas").value = g.vacinas || "";
-
     document.getElementById("odonto").value = g.odonto || "";
-
     document.getElementById("condicoes").value = g.condicoes || "";
-
     document.getElementById("alergias").value = g.alergias || "";
-
     document.getElementById("justificativa").value = g.justificativa || "";
-
     window.scrollTo({ top: 0, behavior: "smooth" });
-
   }
-
-
 
   function removerGestante(id) {
-
     if (!confirm("Remover esta gestante da lista?")) return;
-
     const lista = carregarGestantes().filter(g => g.id !== id);
-
     salvarGestantes(lista);
-
     renderizarTabela();
-
   }
-
-
 
   function abrirResumoPDF(id) {
-
     const lista = carregarGestantes();
-
     const g = lista.find(x => x.id === id);
-
     if (!g) return;
 
-
-
     const ig = calcularIG(g.dum, g.usData, g.usSemanas, g.usDias);
-
-    const dpp = g.dpp || estimarDPP(g.dum, g.usData, g.usSemanas, g.usDias);
-
+    const dpp = estimarDPP(g.dum, g.usData, g.usSemanas, g.usDias);
     const igTexto = ig ? `${ig.semanas}s ${ig.dias}d (${ig.metodo})` : "—";
-
     const idadeCalc = g.dataNasc ? calcularIdade(g.dataNasc) : "";
 
-
-
     const win = window.open("", "_blank");
-
     const html = `
-
       <html>
-
       <head>
-
         <meta charset="UTF-8">
-
         <title>Pré-natal – ${g.nome}</title>
-
         <style>
-
           body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; padding: 20px; }
-
           h1 { font-size: 20px; margin-bottom: 4px; }
-
           h2 { font-size: 16px; margin-top: 16px; }
-
           table { width: 100%; border-collapse: collapse; font-size: 13px; }
-
           td { padding: 4px; border-bottom: 1px solid #ddd; vertical-align: top; }
-
           .label { font-weight: 600; width: 160px; }
-
         </style>
-
       </head>
-
       <body>
-
         <h1>Pré-natal – Dra. Schwartz</h1>
-
         <div>Resumo individual da gestante</div>
 
-
-
         <h2>1. Identificação</h2>
-
         <table>
-
           <tr><td class="label">Nome</td><td>${g.nome || ""}</td></tr>
-
           <tr><td class="label">Data de nascimento</td><td>${g.dataNasc || ""} ${idadeCalc ? " ("+idadeCalc+" anos)" : ""}</td></tr>
-
           <tr><td class="label">Idade (campo)</td><td>${g.idade || ""}</td></tr>
-
           <tr><td class="label">UBS / Microárea</td><td>${g.ubs || ""} ${g.microarea ? " · Microárea " + g.microarea : ""}</td></tr>
-
           <tr><td class="label">ACS</td><td>${g.acs || ""}</td></tr>
-
         </table>
-
-
 
         <h2>2. Gestação</h2>
-
         <table>
-
           <tr><td class="label">Risco</td><td>${g.risco || ""}</td></tr>
-
           <tr><td class="label">DUM</td><td>${g.dum || ""}</td></tr>
-
           <tr><td class="label">1ª US</td><td>${g.usData || ""} ${g.usSemanas ? " (" + g.usSemanas + "s" + (g.usDias ? " " + g.usDias + "d" : "") + ")" : ""}</td></tr>
-
           <tr><td class="label">IG hoje</td><td>${igTexto}</td></tr>
-
           <tr><td class="label">DPP</td><td>${dpp || ""}</td></tr>
-
         </table>
-
-
 
         <h2>3. Consultas</h2>
-
         <table>
-
           <tr><td class="label">Última consulta</td><td>${g.consultaUltima || ""}</td></tr>
-
           <tr><td class="label">Próxima consulta</td><td>${g.consultaProxima || ""}</td></tr>
-
         </table>
-
-
 
         <h2>4. Exames, vacinas e odonto</h2>
-
         <table>
-
           <tr><td class="label">Exames 1º tri</td><td>${g.ex1 || ""}</td></tr>
-
           <tr><td class="label">Exames 2º tri / TTOG</td><td>${g.ex2 || ""}</td></tr>
-
           <tr><td class="label">Exames 3º tri</td><td>${g.ex3 || ""}</td></tr>
-
           <tr><td class="label">Swab</td><td>${g.swab || ""}</td></tr>
-
           <tr><td class="label">Vacinas</td><td>${g.vacinas || ""}</td></tr>
-
           <tr><td class="label">Odonto</td><td>${g.odonto || ""}</td></tr>
-
         </table>
-
-
 
         <h2>5. Condições de saúde e alergias</h2>
-
         <table>
-
           <tr><td class="label">Condições</td><td>${(g.condicoes || "").replace(/\\n/g,"<br>")}</td></tr>
-
           <tr><td class="label">Alergias</td><td>${(g.alergias || "").replace(/\\n/g,"<br>")}</td></tr>
-
         </table>
 
-
-
         <h2>6. Justificativa do risco</h2>
-
         <div>${(g.justificativa || "").replace(/\\n/g,"<br>")}</div>
 
-
-
         <p style="margin-top:18px; font-size:12px; color:#777;">
-
           Gerado automaticamente no app PRÉ-NATAL DRA SCHWARTZ.
-
         </p>
-
       </body>
-
       </html>
-
     `;
-
     win.document.write(html);
-
     win.document.close();
-
   }
 
-
-
-  function renderizarTabela() {
-
-    const corpo = document.getElementById("tabela-gestantes");
-
-    corpo.innerHTML = "";
-
+  // === Relatório geral em página única, com IG atualizada e estratificação por risco ===
+  function exportarPDFGeral() {
     const lista = carregarGestantes();
+    if (!lista || !lista.length) {
+      alert("Nenhuma gestante cadastrada para gerar o relatório.");
+      return;
+    }
+
+    // Monta grupos por risco
+    const grupos = {
+      alto: [],
+      intermediario: [],
+      habitual: [],
+      outro: []
+    };
+
+    lista.forEach(g => {
+      if (!g) return;
+      const ig = calcularIG(g.dum, g.usData, g.usSemanas, g.usDias);
+      const dpp = estimarDPP(g.dum, g.usData, g.usSemanas, g.usDias);
+      const risco = (g.risco || "").toLowerCase();
+
+      const item = {
+        nome: g.nome || "",
+        ubs: g.ubs || "",
+        microarea: g.microarea || "",
+        acs: g.acs || "",
+        risco: risco || "não informado",
+        igTexto: ig ? (ig.semanas + "s " + ig.dias + "d (" + ig.metodo + ")") : "—",
+        dpp: dpp || "—",
+        dum: g.dum || "",
+        usData: g.usData || "",
+        usSemanas: g.usSemanas || "",
+        usDias: g.usDias || "",
+        consultaUltima: g.consultaUltima || "",
+        consultaProxima: g.consultaProxima || "",
+        vacinas: g.vacinas || "",
+        odonto: g.odonto || "",
+        examesResumo: g.examesResumo || "",
+        condicoes: g.condicoes || "",
+        alergias: g.alergias || ""
+      };
+
+      if (risco === "alto") grupos.alto.push(item);
+      else if (risco === "intermediario" || risco === "intermediária") grupos.intermediario.push(item);
+      else if (risco === "habitual") grupos.habitual.push(item);
+      else grupos.outro.push(item);
+    });
+
+    // Ordena dentro de cada grupo por IG total (se disponível)
+    function totalDias(igTexto) {
+      // Ex.: "32s 4d (US)"
+      if (!igTexto || igTexto === "—") return -1;
+      const m = igTexto.match(/(\d+)s\s+(\d+)d/);
+      if (!m) return -1;
+      const s = parseInt(m[1], 10) || 0;
+      const d = parseInt(m[2], 10) || 0;
+      return s * 7 + d;
+    }
+
+    Object.keys(grupos).forEach(k => {
+      grupos[k].sort((a, b) => totalDias(b.igTexto) - totalDias(a.igTexto));
+    });
 
     const hoje = new Date();
+    const hojeStr = hoje.toISOString().slice(0,10).split("-").reverse().join("/");
 
+    let htmlRel = `
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Relatório Geral de Gestantes</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    margin: 20px;
+    color: #111827;
+  }
+  h1 {
+    margin: 0 0 4px;
+    font-size: 20px;
+  }
+  h2 {
+    margin: 18px 0 4px;
+    font-size: 16px;
+  }
+  .subtitulo {
+    font-size: 12px;
+    color: #4b5563;
+    margin-bottom: 10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+  th, td {
+    border: 1px solid #e5e7eb;
+    padding: 4px 6px;
+    vertical-align: top;
+  }
+  th {
+    background: #f3f4f6;
+    font-weight: 600;
+  }
+  .grupo-vazio {
+    font-size: 11px;
+    color: #6b7280;
+    margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Relatório geral de gestantes</h1>
+<div class="subtitulo">Data: ${hojeStr} – IG calculada para a data de hoje.</div>
+`;
+
+    function montarTabela(titulo, listaGrupo) {
+      if (!listaGrupo.length) {
+        htmlRel += `<h2>${titulo}</h2><div class="grupo-vazio">Nenhuma gestante neste grupo.</div>`;
+        return;
+      }
+      htmlRel += `<h2>${titulo} (${listaGrupo.length})</h2>`;
+      htmlRel += `
+<table>
+  <thead>
+    <tr>
+      <th>Nome / UBS</th>
+      <th>IG hoje / DPP</th>
+      <th>DUM / 1ª US</th>
+      <th>Microárea / ACS</th>
+      <th>Cond./Alergias</th>
+      <th>Vacinas / Odonto</th>
+      <th>Consultas</th>
+    </tr>
+  </thead>
+  <tbody>
+`;
+      listaGrupo.forEach(g => {
+        const dppBr = g.dpp && g.dpp !== "—"
+          ? g.dpp.split("-").reverse().join("/")
+          : "—";
+        const dumBr = g.dum ? g.dum.split("-").reverse().join("/") : "";
+        const usBr = g.usData ? g.usData.split("-").reverse().join("/") : "";
+        const usTxt = g.usData
+          ? (usBr + (g.usSemanas ? ` (${g.usSemanas}s${g.usDias ? "+"+g.usDias+"d" : ""})` : ""))
+          : "—";
+
+        const consultasTxt = [
+          g.consultaUltima ? ("Últ.: " + g.consultaUltima) : "",
+          g.consultaProxima ? ("Próx.: " + g.consultaProxima) : ""
+        ].filter(Boolean).join("<br>");
+
+        htmlRel += `
+    <tr>
+      <td><strong>${g.nome}</strong><br>${g.ubs || ""}</td>
+      <td>${g.igTexto}<br>DPP: ${dppBr}</td>
+      <td>DUM: ${dumBr || "—"}<br>US: ${usTxt}</td>
+      <td>${g.microarea || ""}<br>${g.acs || ""}</td>
+      <td>${g.condicoes || ""}<br><em>${g.alergias || ""}</em></td>
+      <td>${g.vacinas || ""}<br>${g.odonto || ""}</td>
+      <td>${consultasTxt || "—"}</td>
+    </tr>
+`;
+      });
+
+      htmlRel += `
+  </tbody>
+</table>
+`;
+    }
+
+    montarTabela("Alto risco", grupos.alto);
+    montarTabela("Risco intermediário", grupos.intermediario);
+    montarTabela("Risco habitual", grupos.habitual);
+    if (grupos.outro.length) {
+      montarTabela("Sem risco definido / outro", grupos.outro);
+    }
+
+    htmlRel += `
+</body>
+</html>
+`;
+
+    const novaJanela = window.open("", "_blank");
+    if (!novaJanela) {
+      alert("Bloqueio de pop-up: permita pop-ups para visualizar o relatório.");
+      return;
+    }
+    novaJanela.document.open();
+    novaJanela.document.write(htmlRel);
+    novaJanela.document.close();
+  }
+
+  function renderizarTabela() {
+    const corpo = document.getElementById("tabela-gestantes");
+    corpo.innerHTML = "";
+    const lista = carregarGestantes();
+    const hoje = new Date();
     hoje.setHours(0,0,0,0);
-
     const hojeNum = hoje.getTime();
-
-
 
     lista.forEach(g => { g.ig = calcularIG(g.dum, g.usData, g.usSemanas, g.usDias); });
 
-
-
     lista.sort((a,b) => {
-
       const aProx = a.consultaProxima ? new Date(a.consultaProxima).getTime() : Infinity;
-
       const bProx = b.consultaProxima ? new Date(b.consultaProxima).getTime() : Infinity;
-
       const aAtraso = (aProx < hojeNum) ? 1 : 0;
-
       const bAtraso = (bProx < hojeNum) ? 1 : 0;
-
       if (aAtraso !== bAtraso) return bAtraso - aAtraso;
 
-
-
       const prioridadeRisco = { "alto": 3, "intermediario": 2, "baixo": 1, "": 0, null: 0 };
-
       const rA = prioridadeRisco[a.risco] || 0;
-
       const rB = prioridadeRisco[b.risco] || 0;
-
       if (rA !== rB) return rB - rA;
 
-
-
       const igA = a.ig ? a.ig.total : -1;
-
       const igB = b.ig ? b.ig.total : -1;
-
       return igB - igA;
-
     });
 
-
-
     lista.forEach(g => {
-
       const ig = g.ig;
-
       const dpp = g.dpp || estimarDPP(g.dum, g.usData, g.usSemanas, g.usDias);
-
       const risco = g.risco || "";
-
       const classeLinha = risco ? "row-" + risco : "";
 
-
-
       const proxNum = g.consultaProxima ? new Date(g.consultaProxima).getTime() : Infinity;
-
       const hoje = new Date();
-
       hoje.setHours(0,0,0,0);
-
       const atrasada = proxNum < hoje.getTime();
 
-
-
       if (filtroAtual === "atraso" && !atrasada) return;
-
       if (filtroAtual === "risco" && !(risco === "alto" || risco === "intermediario")) return;
 
-
-
       let textoIG = "—";
-
       if (ig) textoIG = `${ig.semanas}s ${ig.dias}d (${ig.metodo})`;
 
-
-
       const consultaProximaTxt = g.consultaProxima || "";
-
       let textoConsulta = "";
-
       if (g.consultaUltima) textoConsulta += "Última: " + g.consultaUltima + "<br>";
-
       if (consultaProximaTxt) {
-
         const dataProx = new Date(consultaProximaTxt);
-
         dataProx.setHours(0,0,0,0);
-
         if (dataProx < hoje) {
-
           textoConsulta += `<span class="badge badge-warn">Próxima (atrasada): ${consultaProximaTxt}</span>`;
-
         } else {
-
           textoConsulta += `Próxima: ${consultaProximaTxt}`;
-
         }
-
       }
-
-
 
       const alertas = gerarAlertasExames(ig, g.ex1, g.ex2, g.ex3, g.swab);
 
-
-
       let riskLabel = "Não informado";
-
       if (risco === "baixo") riskLabel = "Risco habitual";
-
       if (risco === "intermediario") riskLabel = "Risco intermediário";
-
       if (risco === "alto") riskLabel = "Alto risco";
-
-
 
       const pillClass = risco ? `pill-risk ${risco}` : "pill-risk";
 
-
-
       const idadeCalc = g.dataNasc ? calcularIdade(g.dataNasc) : "";
 
-
-
       const linha = document.createElement("tr");
-
       linha.className = classeLinha;
 
-
-
       linha.innerHTML = `
-
         <td>
-
           <strong>🤰 ${g.nome || "Sem nome"}</strong><br>
-
           <span class="small">
-
             ${g.dataNasc ? "Nasc.: " + g.dataNasc + (idadeCalc ? " ("+idadeCalc+" anos)" : "") + "<br>" : ""}
-
             ${g.idade ? "Idade (campo): " + g.idade + " anos<br>" : ""}
-
             ${g.ubs || ""} ${g.microarea ? " · Microárea " + g.microarea : ""} ${g.acs ? " · ACS " + g.acs : ""}
-
           </span>
-
         </td>
-
         <td>
-
           ${textoIG}<br>
-
           <span class="small">
-
             ${g.dum ? "DUM: " + g.dum + "<br>" : ""}
-
             ${g.usData ? "1ª US: " + g.usData + " (" + (g.usSemanas || "0") + "s" + (g.usDias ? " " + g.usDias + "d" : "") + ")<br>" : ""}
-
             DPP: ${dpp || "—"}
-
           </span>
-
         </td>
-
         <td>
-
           <span class="${pillClass}">
-
             ${riskLabel}
-
           </span>
-
         </td>
-
         <td>
-
           ${badgeExame(g.ex1, "1º tri")}<br>
-
           ${badgeExame(g.ex2, "2º tri / TTOG")}<br>
-
           ${badgeExame(g.ex3, "3º tri")}<br>
-
           ${badgeExame(g.swab, "Swab")}<br>
-
           ${badgeOkPend(g.vacinas, "Vacinas em dia", "Vacinas pendentes")}<br>
-
           ${badgeOkPend(g.odonto, "Odonto OK", "Odonto pendente")}
-
         </td>
-
         <td>
-
           ${textoConsulta || "—"}
-
         </td>
-
         <td>
-
           ${alertas}
-
         </td>
-
         <td>
-
           <span class="small">
-
             ${g.condicoes ? "<b>Condições:</b> " + g.condicoes.replace(/\\n/g,"<br>") + "<br>" : ""}
-
             ${g.alergias ? "<b>Alergias:</b> " + g.alergias.replace(/\\n/g,"<br>") + "<br>" : ""}
-
             ${g.justificativa ? "<b>Justificativa:</b> " + g.justificativa.replace(/\\n/g,"<br>") : ""}
-
             ${!g.condicoes && !g.alergias && !g.justificativa ? "—" : ""}
-
           </span>
-
         </td>
-
         <td>
-
           <button class="btn-outline btn-small" type="button" onclick='editarGestante(${JSON.stringify(g.id)})'>✏️ Editar</button>
-
           <button class="btn-outline btn-small" type="button" onclick='removerGestante(${JSON.stringify(g.id)})'>🗑️ Remover</button>
-
           <button class="btn-outline btn-small" type="button" onclick='abrirResumoPDF(${JSON.stringify(g.id)})'>📄 PDF</button>
-
         </td>
-
       `;
-
       corpo.appendChild(linha);
-
     });
 
-
-
     atualizarBotoesFiltro();
-
   }
-
-
 
   function editarGestante(id) {
-
     const lista = carregarGestantes();
-
     const g = lista.find(x => x.id === id);
-
     if (!g) return;
-
     preencherFormulario(g);
-
   }
 
-
-
   document.getElementById("form-gestante").addEventListener("submit", function(e) {
-
     e.preventDefault();
-
     const lista = carregarGestantes();
-
     const idExistente = document.getElementById("id").value;
-
     const isNovo = !idExistente;
 
-
-
     const nome = document.getElementById("nome").value.trim();
-
     if (!nome) {
-
       alert("Informe o nome da gestante.");
-
       return;
-
     }
-
-
 
     const dum = document.getElementById("dum").value;
-
     const usData = document.getElementById("usData").value;
-
     const usSemanas = document.getElementById("usSemanas").value;
-
     const usDias = document.getElementById("usDias").value;
-
     const risco = document.getElementById("risco").value;
-
     const consultaUltima = document.getElementById("consultaUltima").value;
-
     let consultaProxima = document.getElementById("consultaProxima").value;
 
-
-
     const ig = calcularIG(dum, usData, usSemanas, usDias);
-
     const dpp = estimarDPP(dum, usData, usSemanas, usDias);
 
-
-
     if (!consultaProxima && ig) {
-
       consultaProxima = sugerirProximaConsulta(ig, risco, consultaUltima);
-
     }
-
-
 
     const gestante = {
-
       id: isNovo ? Date.now() : Number(idExistente),
-
       nome,
-
       dataNasc: document.getElementById("dataNasc").value,
-
       idade: document.getElementById("idade").value,
-
       ubs: document.getElementById("ubs").value,
-
       microarea: document.getElementById("microarea").value,
-
       acs: document.getElementById("acs").value,
-
       risco,
-
       dum,
-
       usData,
-
       usSemanas,
-
       usDias,
-
       consultaUltima,
-
       consultaProxima,
-
       dpp,
-
       swab: document.getElementById("swab").value,
-
       ex1: document.getElementById("ex1").value,
-
       ex2: document.getElementById("ex2").value,
-
       ex3: document.getElementById("ex3").value,
-
       vacinas: document.getElementById("vacinas").value,
-
       odonto: document.getElementById("odonto").value,
-
       condicoes: document.getElementById("condicoes").value.trim(),
-
       alergias: document.getElementById("alergias").value.trim(),
-
       justificativa: document.getElementById("justificativa").value.trim()
-
     };
 
-
-
     const listaAtual = carregarGestantes();
-
     if (isNovo) {
-
       listaAtual.push(gestante);
-
     } else {
-
       const idx = listaAtual.findIndex(g => g.id === gestante.id);
-
       if (idx >= 0) listaAtual[idx] = gestante;
-
     }
-
-
 
     salvarGestantes(listaAtual);
-
     renderizarTabela();
-
     document.getElementById("dpp").value = dpp || "";
-
   });
 
-
-
   function exportarCSV() {
-
     const lista = carregarGestantes();
-
     if (!lista.length) {
-
       alert("Não há gestantes cadastradas.");
-
       return;
-
     }
 
-
-
     const headers = [
-
       "Nome","DataNasc","IdadeCampo","UBS","Microarea","ACS","Risco",
-
       "DUM","Data1aUS","IGUS_sem","IGUS_dias",
-
       "UltimaConsulta","ProximaConsulta","DPP",
-
       "Exames1Tri","Exames2Tri_TTOG","Exames3Tri",
-
       "Swab","Vacinas","Odonto",
-
       "CondicoesSaude","Alergias","Justificativa"
-
     ];
-
-
 
     const linhas = [headers.join(";")];
 
-
-
     lista.forEach(g => {
-
       const linha = [
-
         g.nome || "",
-
         g.dataNasc || "",
-
         g.idade || "",
-
         g.ubs || "",
-
         g.microarea || "",
-
         g.acs || "",
-
         g.risco || "",
-
         g.dum || "",
-
         g.usData || "",
-
         g.usSemanas || "",
-
         g.usDias || "",
-
         g.consultaUltima || "",
-
         g.consultaProxima || "",
-
         g.dpp || "",
-
         g.ex1 || "",
-
         g.ex2 || "",
-
         g.ex3 || "",
-
         g.swab || "",
-
         g.vacinas || "",
-
         g.odonto || "",
-
         (g.condicoes || "").replace(/[\r\n]+/g," "),
-
         (g.alergias || "").replace(/[\r\n]+/g," "),
-
         (g.justificativa || "").replace(/[\r\n]+/g," ")
-
       ];
-
       linhas.push(linha.join(";"));
-
     });
-
-
 
     const blob = new Blob([linhas.join("\n")], {type: "text/csv;charset=utf-8;"});
-
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement("a");
-
     a.href = url;
-
     a.download = "gestantes-pre-natal-dra-schwartz.csv";
-
     document.body.appendChild(a);
-
     a.click();
-
     document.body.removeChild(a);
-
     URL.revokeObjectURL(url);
-
   }
-
-
 
   function exportarBackupJSON() {
-
     const lista = carregarGestantes();
-
     const blob = new Blob([JSON.stringify(lista, null, 2)], {type: "application/json;charset=utf-8;"});
-
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement("a");
-
     a.href = url;
-
     a.download = "backup-pre-natal-dra-schwartz.json";
-
     document.body.appendChild(a);
-
     a.click();
-
     document.body.removeChild(a);
-
     URL.revokeObjectURL(url);
-
   }
-
-
 
   function importarBackupJSON(event) {
-
     const file = event.target.files[0];
-
     if (!file) return;
-
     const reader = new FileReader();
-
     reader.onload = e => {
-
       try {
-
         const dados = JSON.parse(e.target.result);
-
         if (!Array.isArray(dados)) throw new Error("Formato inválido");
-
         salvarGestantes(dados);
-
         renderizarTabela();
-
         alert("Backup importado com sucesso!");
-
       } catch (err) {
-
         alert("Erro ao importar backup. Verifique o arquivo.");
-
       }
-
     };
-
     reader.readAsText(file, "utf-8");
-
   }
-
-
 
   let qrInstance;
-
   function gerarQRCode() {
-
     const container = document.getElementById("qrcode");
-
     container.innerHTML = "";
-
     const url = window.location.href;
-
     qrInstance = new QRCode(container, { text: url, width: 160, height: 160 });
-
   }
-
-
 
   function setFiltro(tipo) {
-
     filtroAtual = tipo;
-
     renderizarTabela();
-
   }
-
-
 
   function atualizarBotoesFiltro() {
-
     const map = { "todas": "f-todas", "atraso": "f-atraso", "risco": "f-risco" };
-
     Object.keys(map).forEach(k => {
-
       const btn = document.getElementById(map[k]);
-
       if (!btn) return;
-
       if (k === filtroAtual) btn.classList.add("btn-filter-active");
-
       else btn.classList.remove("btn-filter-active");
-
     });
-
   }
 
+  // === AQUI TRAVAMOS O APP PARA EXIGIR LOGIN DO NETLIFY IDENTITY ===
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.netlifyIdentity) {
+      netlifyIdentity.on("init", (user) => {
+        if (user) {
+          // Já logado → mostra a tabela normalmente
+          renderizarTabela();
+        } else {
+          // Não logado → abre modal de login
+          netlifyIdentity.open();
+        }
+      });
 
+      netlifyIdentity.on("login", () => {
+        netlifyIdentity.close();
+        renderizarTabela();
+      });
 
-  window.addEventListener("DOMContentLoaded", () => {
+      netlifyIdentity.on("logout", () => {
+        window.location.reload();
+      });
 
-    renderizarTabela();
-
+      netlifyIdentity.init();
+    } else {
+      // Se o Identity não estiver disponível por algum motivo, não bloqueia
+      renderizarTabela();
+    }
   });
-
 </script>
 
-
-
 </body>
-
 </html>
