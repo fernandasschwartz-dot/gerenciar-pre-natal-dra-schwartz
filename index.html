@@ -5,7 +5,7 @@
   <title>PRÉ-NATAL DRA SCHWARTZ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Netlify Identity: exige login para usar o gerenciador -->
+  <!-- Netlify Identity: exige login para acessar o gerenciador -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
@@ -267,7 +267,7 @@
 
 <div class="container">
 
-  <!-- Botão de logout (só funciona se Identity estiver ativo no Netlify) -->
+  <!-- Botão de logout (Netlify Identity) -->
   <div style="text-align:right; margin-bottom:8px;">
     <button type="button" class="btn-outline btn-small"
             onclick="if (window.netlifyIdentity) { netlifyIdentity.logout(); }">
@@ -487,12 +487,10 @@
   <!-- BACKUP / QR CODE -->
   <div class="card">
     <h2>📦 Backup e compartilhamento</h2>
-
     <div class="small">
       Para usar em outro aparelho, exporte o backup em JSON neste dispositivo
       e depois importe no outro aparelho usando o mesmo app.
     </div>
-
     <div class="row" style="margin-top:8px;">
       <div class="col-6">
         <button class="btn-outline" type="button" onclick="exportarBackupJSON()">📤 Exportar backup (.json)</button>
@@ -771,12 +769,12 @@
 
         <h2>5. Condições de saúde e alergias</h2>
         <table>
-          <tr><td class="label">Condições</td><td>${(g.condicoes || "").replace(/\\n/g,"<br>")}</td></tr>
-          <tr><td class="label">Alergias</td><td>${(g.alergias || "").replace(/\\n/g,"<br>")}</td></tr>
+          <tr><td class="label">Condições</td><td>${(g.condicoes || "").replace(/\n/g,"<br>")}</td></tr>
+          <tr><td class="label">Alergias</td><td>${(g.alergias || "").replace(/\n/g,"<br>")}</td></tr>
         </table>
 
         <h2>6. Justificativa do risco</h2>
-        <div>${(g.justificativa || "").replace(/\\n/g,"<br>")}</div>
+        <div>${(g.justificativa || "").replace(/\n/g,"<br>")}</div>
 
         <p style="margin-top:18px; font-size:12px; color:#777;">
           Gerado automaticamente no app PRÉ-NATAL DRA SCHWARTZ.
@@ -839,7 +837,6 @@
 
     // Ordena dentro de cada grupo por IG total (se disponível)
     function totalDias(igTexto) {
-      // Ex.: "32s 4d (US)"
       if (!igTexto || igTexto === "—") return -1;
       const m = igTexto.match(/(\d+)s\s+(\d+)d/);
       if (!m) return -1;
@@ -1094,9 +1091,9 @@
         </td>
         <td>
           <span class="small">
-            ${g.condicoes ? "<b>Condições:</b> " + g.condicoes.replace(/\\n/g,"<br>") + "<br>" : ""}
-            ${g.alergias ? "<b>Alergias:</b> " + g.alergias.replace(/\\n/g,"<br>") + "<br>" : ""}
-            ${g.justificativa ? "<b>Justificativa:</b> " + g.justificativa.replace(/\\n/g,"<br>") : ""}
+            ${g.condicoes ? "<b>Condições:</b> " + g.condicoes.replace(/\n/g,"<br>") + "<br>" : ""}
+            ${g.alergias ? "<b>Alergias:</b> " + g.alergias.replace(/\n/g,"<br>") + "<br>" : ""}
+            ${g.justificativa ? "<b>Justificativa:</b> " + g.justificativa.replace(/\n/g,"<br>") : ""}
             ${!g.condicoes && !g.alergias && !g.justificativa ? "—" : ""}
           </span>
         </td>
@@ -1298,12 +1295,12 @@
     });
   }
 
-  // === AQUI TRAVAMOS O APP PARA EXIGIR LOGIN DO NETLIFY IDENTITY ===
+  // === AQUI EXIGIMOS LOGIN DO NETLIFY IDENTITY ===
   document.addEventListener("DOMContentLoaded", () => {
     if (window.netlifyIdentity) {
       netlifyIdentity.on("init", (user) => {
         if (user) {
-          // Já logado → mostra a tabela normalmente
+          // Já logado → mostra a tabela
           renderizarTabela();
         } else {
           // Não logado → abre modal de login
@@ -1322,7 +1319,7 @@
 
       netlifyIdentity.init();
     } else {
-      // Se o Identity não estiver disponível por algum motivo, não bloqueia
+      // Se Identity não carregar, não trava (fallback)
       renderizarTabela();
     }
   });
